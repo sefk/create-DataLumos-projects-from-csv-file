@@ -39,6 +39,7 @@ is only for convenience, I copy it when I begin the work on a new HIFLD dataset.
 selection of the rows that are proceeded by the code (and this row can be deleted in the spreadsheet/csv, if not needed).
 - the "path" column is the folder name for the folder where the data files are located, and should be identical to the one
 in the inventory sheet (for example: .\epa-facilities)
+- the keywords have to be separated by commas in the spreadsheet cell. They can be written with quotation marks or not, and they can optionally be between square brackets.
 
 ## Benefits:
 - it's easier to fill in the data in a spreadsheet than in the forms of DataLumos (for example the keywords). And you simply can copy-paste the details that stay the same. 
