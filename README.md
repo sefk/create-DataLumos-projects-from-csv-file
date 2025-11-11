@@ -46,18 +46,28 @@ in the inventory sheet (for example: .\epa-facilities)
 - you can process more than one data project at once with the csv file; the script adds the projects to the workspace. You can check and publish them later.
 - when the site is loading slow, you don't need to wait for every single input to be processed while you stare at the "busy" icon ;) 
 
+# Installation
 
+[Firefox][] is a requirement.
 
+Selenium does the heavy lifting the script. But before installing that, you may
+want to create a virtual environment.
 
+```bash
+python3 -m venv env
+source ./env/bin/activate
+```
 
+If you do this, remember to source this virtual environment every time you work
+here. Or consider setting up [direnv][] as a convenient way to automatically
+source this environment whenever you're in this directory. The provided `.envrc`
+assumes your virtual environment is in `env`.
 
+_Now_ you're ready to install your requirements.
 
+```bash
+pip3 install -r requirements.txt
+```
 
-
-
-
-
-
-
-
-
+[Firefox]: https://www.firefox.com/
+[direnv]: https://direnv.net/
