@@ -24,7 +24,8 @@ of the instruction ("HIFLD Open to DataLumos Workflow", https://docs.google.com/
 is only for convenience, I copy it when I begin the work on a new HIFLD dataset. It must not be included in the
 selection of the rows that are proceeded by the code (and this row can be deleted in the spreadsheet/csv, if not needed).
 - the "path" column is the folder name for the folder where the data files are located, and should be identical to the one
-in the inventory sheet (for example: .\epa-facilities)
+in the inventory sheet (for example: ./epa-facilities). It should match how path separators work on your operating system,
+backslashes for Windows and forward slashes for Linux and MacOS.
 - inputs in the column 12_download_date_original_source are optional
 """
 
