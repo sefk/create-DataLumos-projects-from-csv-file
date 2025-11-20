@@ -83,10 +83,10 @@ def get_paths_uploadfiles(folderpath):
     #   where all the data folders are located (for example, the path to the external USB drive).
     path = datadict["path"]
     path = path[2:]  # eliminate the first two characters, the dot and the slash
-    uploadfiles_names = os.listdir(os.path.join(folder_path_uploadfiles, path))  # list the names of the files
+    uploadfiles_names = os.listdir(os.path.join(folderpath, path))  # list the names of the files
     print("\nFiles that will be uploaded:", uploadfiles_names, "\n")
     # build the complete paths for the files that should be uploaded, by joining the single parts of the path:
-    uploadfiles_paths = [os.path.join(folder_path_uploadfiles, path, filename) for filename in uploadfiles_names]
+    uploadfiles_paths = [os.path.join(folderpath, path, filename) for filename in uploadfiles_names]
     #print(uploadfiles_paths)
     return uploadfiles_paths
 
@@ -375,7 +375,7 @@ for current_row in range(start_row, end_row + 1):
     #sleep(10)
     test2 = mydriver.find_elements(By.XPATH, "//span[text()='File added to queue for upload.']")
     # wait until the text has appeared as often as there are files:
-    WebDriverWait(mydriver, 1000).until(lambda x: True if len(mydriver.find_elements(By.XPATH, "//span[text()='File added to queue for upload.']")) == filecount else False)
+    WebDriverWait(mydriver, 2000).until(lambda x: True if len(mydriver.find_elements(By.XPATH, "//span[text()='File added to queue for upload.']")) == filecount else False)
     print("\nEverything should be uploaded completely now.\n")
 
 
