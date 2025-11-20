@@ -71,3 +71,9 @@ pip3 install -r requirements.txt
 
 [Firefox]: https://www.firefox.com/
 [direnv]: https://direnv.net/
+
+<br>
+<br>
+
+----------------------
+Thanks to sefk for his contributions.
