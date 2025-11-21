@@ -30,15 +30,12 @@ There is no error handling. But the browser remains open even if the script cras
 
 ### About the template spreadsheet:
 - The black column names are the ones that are processed by the code (the red ones are added for myself).
-- The names of the columns that are processed in the script cannot be changed (or the code has to be changed too).
+- The names of the columns that are processed in the script cannot be changed (or the code has to be changed too), but they can be left empty if not needed.
 Other columns can be added (but will be ignored by the code), and the order of the columns doesn't matter (they can be arranged as you work best).
-- The script was written for the HIFLD Open datasets and adapted for it. The numbers in the column rows relate to the steps
-of the instruction ("HIFLD Open to DataLumos Workflow", https://docs.google.com/document/d/12rZAhiOeqFzRsE6HxQIZRs7Ts8JSyQ9up25aCnHS9p0/edit )
-- The first content line in the spreadsheet contains the details that are always the same for the HIFLD data (they have a grey background). This row
-is only for convenience, I copy it when I begin the work on a new HIFLD dataset. It must not be included in the
-selection of the rows that are proceeded by the code (and this row can be deleted in the spreadsheet/csv, if not needed).
-- the "path" column is the folder name for the folder where the data files are located, and should be identical to the one
-in the inventory sheet (for example: .\epa-facilities)
+- The script works for different datastes, but the column names of the template are adapted for the HIFLD Open datasets (The numbers in the column rows relate to the steps
+of the instruction ("HIFLD Open to DataLumos Workflow", https://docs.google.com/document/d/12rZAhiOeqFzRsE6HxQIZRs7Ts8JSyQ9up25aCnHS9p0/edit ), and the first content line in the spreadsheet contains the details that are always the same for the HIFLD data (they have a grey background). This row is only for convenience, I copy it when I begin the work on a new HIFLD dataset. It must not be included in the
+selection of the rows that are proceeded by the code, and this row can be deleted in the spreadsheet/csv, if not needed).
+- The "path" column is the folder name for the folder where the data files are located, and can be identical to the one in the inventory sheet (for example: .\epa-facilities), but can also be written without .\ at the beginning. It also doesn't matter if the path is in linux or windows format, both / and \ can be used. 
 - the keywords have to be separated by commas in the spreadsheet cell. They can be written with quotation marks or not, and they can optionally be between square brackets.
 
 ## Benefits:
