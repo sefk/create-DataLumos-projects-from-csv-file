@@ -10,7 +10,7 @@ It allows adding many data projects to DataLumos in one go.
 
 
 ## How it works:
-You prepare the spreadsheet with the metadata, save it as csv file, then run the script an log in manually in the browser. Then the script fills in the data and uploads the files automatically.
+You prepare the spreadsheet with the metadata, save it as csv file, then run the script and log in manually in the browser. Then the script fills in the data and uploads the files automatically.
 After that, you manually check and publish the project.
 - Prepare the csv file: Fill in your metadata etc. in the template spreadsheet, then save it as a csv file. (For details to the template, see further below).
 - Prepare the code:
@@ -29,7 +29,7 @@ There is no error handling. But the browser remains open even if the script cras
 
 
 ### About the template spreadsheet:
-- The black column names are the ones that are processed by the code (the red ones are added for myself).
+- The black column names are the ones that are processed by the code (I added the red columns for my own use).
 - The names of the columns that are processed in the script cannot be changed (or the code has to be changed too), but they can be left empty if not needed.
 Other columns can be added (but will be ignored by the code), and the order of the columns doesn't matter (they can be arranged as you work best).
 - The script works for different datastes, but the column names of the template are adapted for the HIFLD Open datasets (The numbers in the column rows relate to the steps
