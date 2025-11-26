@@ -26,9 +26,9 @@ import os
 #########################################################
 
 # TODO: VARIABLES TO SET:
-start_row = 3 # WITHOUT COUNTING THE COLUMNS ROW!  (and beginning at 1)
-end_row = 12 # (to process only one row, set start_row and end_row to the same number)
-csv_file_path = "hifld-nmg.csv"  # or the complete path, for example: "/home/YNodd/PycharmProjects/datalumos/my_current_inputdata.csv"
+start_row = 42 # WITHOUT COUNTING THE COLUMNS ROW!  (and beginning at 1)
+end_row = 42  # (to process only one row, set start_row and end_row to the same number)
+csv_file_path = "examples/hifld-usace2.csv"  # or the complete path, for example: "/home/YNodd/PycharmProjects/datalumos/my_current_inputdata.csv"
 folder_path_uploadfiles = "/Users/sefk/Globus/"  # the folder where the upload files are (there, the subfolders for the single data projects are located)
 # example: the files are on a USB flash drive, in a folder named "data rescue project", the example path would be: /media/YNodd/32 GB/data rescue project/
 #   in there is the folder "national-transit-map-stops" which contains the zip-files and metadata.xml for uploading
