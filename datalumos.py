@@ -48,7 +48,7 @@ def wait_for_obscuring_elements(current_driver_obj):
         print(f"... (Waiting for overlay to disappear. Overlay(s): {overlays})")
         for overlay in overlays:
             # Wait until the overlay becomes invisible:
-            WebDriverWait(current_driver_obj, 360).until(EC.invisibility_of_element_located(overlay))
+            WebDriverWait(current_driver_obj, 600).until(EC.invisibility_of_element_located(overlay))
             sleep(0.5)
 
 def read_csv_line(csv_file, line_to_process):
@@ -126,7 +126,7 @@ print("If you upload from USB device: MAKE SURE THE USB IS PLUGGED IN!\n")
 
 for current_row in range(start_row, end_row + 1):
 
-    new_project_btn = WebDriverWait(mydriver, 360).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".btn > span:nth-child(3)"))) # .btn > span:nth-child(3)
+    new_project_btn = WebDriverWait(mydriver, 600).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".btn > span:nth-child(3)"))) # .btn > span:nth-child(3)
     #print("button found")
     wait_for_obscuring_elements(mydriver)
     new_project_btn.click()
@@ -140,17 +140,17 @@ for current_row in range(start_row, end_row + 1):
     # --- Title
 
     # <input type="text" class="form-control" name="title" id="title" value="" data-reactid=".2.0.0.1.2.0.$0.$0.$0.$displayPropKey2.0.2.0">
-    project_title_form = WebDriverWait(mydriver, 10).until(EC.presence_of_element_located((By.ID, "title")))
+    project_title_form = WebDriverWait(mydriver, 60).until(EC.presence_of_element_located((By.ID, "title")))
     # title with pre-title (if existent):
     pojecttitle = datadict["4_title"] if len(datadict["4_pre_title"]) == 0 else datadict["4_pre_title"] + " " + datadict["4_title"]
     project_title_form.send_keys(pojecttitle)
     # .save-project
-    project_title_apply = WebDriverWait(mydriver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".save-project")))
+    project_title_apply = WebDriverWait(mydriver, 300).until(EC.element_to_be_clickable((By.CSS_SELECTOR, ".save-project")))
     #print("project_title_apply - found")
     project_title_apply.click()
     # <a role="button" class="btn btn-primary" href="workspace?goToPath=/datalumos/239181&amp;goToLevel=project" data-reactid=".2.0.0.1.2.1.0.0.0">Continue To Project Workspace</a>
     #   CSS-selector: a.btn-primary
-    project_title_apply2 = WebDriverWait(mydriver, 100).until(EC.presence_of_element_located((By.LINK_TEXT, "Continue To Project Workspace")))
+    project_title_apply2 = WebDriverWait(mydriver, 300).until(EC.presence_of_element_located((By.LINK_TEXT, "Continue To Project Workspace")))
     #print("Continue To Project Workspace - found")
     project_title_apply2.click()
 
@@ -159,13 +159,13 @@ for current_row in range(start_row, end_row + 1):
 
     # collapse all: <span data-reactid=".0.3.1.1.0.1.2.0.1.0.1.1"> Collapse All</span>
     #   css-selector: #expand-init > span:nth-child(2)
-    collapse_btn = WebDriverWait(mydriver, 50).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#expand-init > span:nth-child(2)")))
+    collapse_btn = WebDriverWait(mydriver, 240).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#expand-init > span:nth-child(2)")))
     wait_for_obscuring_elements(mydriver)
     collapse_btn.click()
     sleep(2)
     # expand all: <span data-reactid=".0.3.1.1.0.1.2.0.1.0.1.1"> Expand All</span>
     #   CSS-selector:    #expand-init > span:nth-child(2)
-    expand_btn = WebDriverWait(mydriver, 50).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#expand-init > span:nth-child(2)")))
+    expand_btn = WebDriverWait(mydriver, 240).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#expand-init > span:nth-child(2)")))
     wait_for_obscuring_elements(mydriver)
     expand_btn.click()
     sleep(2)
@@ -178,23 +178,23 @@ for current_row in range(start_row, end_row + 1):
     agency_investigator = [datadict["5_agency"], datadict["5_agency2"]]
     for singleinput in agency_investigator:
         if len(singleinput) != 0 and singleinput != " ":
-            add_gvmnt_value = WebDriverWait(mydriver, 100).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#groupAttr0 > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > a:nth-child(3) > span:nth-child(3)")))
+            add_gvmnt_value = WebDriverWait(mydriver, 240).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#groupAttr0 > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > a:nth-child(3) > span:nth-child(3)")))
             #print("add_gvmnt_value found")
             wait_for_obscuring_elements(mydriver)
             add_gvmnt_value.click()
             # <a href="#org" aria-controls="org" role="tab" data-toggle="tab" data-reactid=".2.0.0.1.0.1.0">Organization/Agency</a>
             #    css-selector: div.modal:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > ul:nth-child(1) > li:nth-child(2) > a:nth-child(1)
-            agency_tab = WebDriverWait(mydriver, 100).until(EC.element_to_be_clickable((By.LINK_TEXT, "Organization/Agency")))
+            agency_tab = WebDriverWait(mydriver, 240).until(EC.element_to_be_clickable((By.LINK_TEXT, "Organization/Agency")))
             #print("agency_tab found")
             wait_for_obscuring_elements(mydriver)
             agency_tab.click()
             # <input type="text" name="orgName" id="orgName" required="" class="form-control ui-autocomplete-input" value="" data-reactid=".2.0.0.1.1.1.0.0.0.1.0.0.0.1.0" autocomplete="off">
-            agency_field = WebDriverWait(mydriver, 100).until(EC.presence_of_element_located((By.ID, "orgName")))
+            agency_field = WebDriverWait(mydriver, 240).until(EC.presence_of_element_located((By.ID, "orgName")))
             agency_field.send_keys(singleinput)
             # submit: <button type="button" class="btn btn-primary save-org" data-reactid=".2.0.0.1.1.1.0.0.0.1.0.0.1.0.0">Save &amp; Apply</button>
             #   .save-org
             wait_for_obscuring_elements(mydriver)
-            submit_agency_btn = WebDriverWait(mydriver, 100).until(EC.element_to_be_clickable((By.CSS_SELECTOR, ".save-org")))
+            submit_agency_btn = WebDriverWait(mydriver, 240).until(EC.element_to_be_clickable((By.CSS_SELECTOR, ".save-org")))
             submit_agency_btn.click()
 
 
@@ -204,18 +204,18 @@ for current_row in range(start_row, end_row + 1):
     if len(summarytext) != 0 and summarytext != " ":
         # summary edit: <span data-reactid=".0.3.1.1.0.1.2.0.2.1:$0.$0.$0.0.$displayPropKey2.$dcterms_description_0.1.0.0.0.2.1"> edit</span>
         #   CSS-selector: #edit-dcterms_description_0 > span:nth-child(2)
-        edit_summary = WebDriverWait(mydriver, 100).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#edit-dcterms_description_0 > span:nth-child(2)")))
+        edit_summary = WebDriverWait(mydriver, 240).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#edit-dcterms_description_0 > span:nth-child(2)")))
         #print("edit_summary found")
         wait_for_obscuring_elements(mydriver)
         edit_summary.click()
         # summary form: <body contenteditable="true" class="editable-wysihtml5 wysihtml5-editor" spellcheck="true" style="background-color: rgb(255, 255, 255); color: rgb(51, 51, 51); cursor: text; font-family: &quot;Atkinson Hyperlegible&quot;, sans-serif; font-size: 16px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 20px; letter-spacing: normal; text-align: start; text-decoration: rgb(51, 51, 51); text-indent: 0px; text-rendering: optimizelegibility; word-break: normal; overflow-wrap: break-word; word-spacing: 0px;"><span id="_wysihtml5-undo" class="_wysihtml5-temp">﻿</span></body>
         #   css-sel.: body
-        summary_form = WebDriverWait(mydriver, 100).until(EC.presence_of_element_located((By.CSS_SELECTOR, "body")))
+        summary_form = WebDriverWait(mydriver, 240).until(EC.presence_of_element_located((By.CSS_SELECTOR, "body")))
         wait_for_obscuring_elements(mydriver)
         summary_form.send_keys(datadict["6_summary_description"])
         # save: <i class="glyphicon glyphicon-ok"></i>
         #   .glyphicon-ok
-        save_summary_btn = WebDriverWait(mydriver, 100).until(EC.element_to_be_clickable((By.CSS_SELECTOR, ".glyphicon-ok")))
+        save_summary_btn = WebDriverWait(mydriver, 240).until(EC.element_to_be_clickable((By.CSS_SELECTOR, ".glyphicon-ok")))
     else:
         print("The summary is mandatory for the DataLumos project! Please fill it in manually.")
 
@@ -226,12 +226,12 @@ for current_row in range(start_row, end_row + 1):
     if len(original_url_text) != 0 and original_url_text != " ":
         # edit: <span data-reactid=".0.3.1.1.0.1.2.0.2.1:$0.$0.$0.0.$displayPropKey4.$imeta_sourceURL_0.1.0.0.0.2.0.1"> edit</span>
         #   css-sel: #edit-imeta_sourceURL_0 > span:nth-child(1) > span:nth-child(2)
-        orig_distr_edit = WebDriverWait(mydriver, 100).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#edit-imeta_sourceURL_0 > span:nth-child(1) > span:nth-child(2)")))
+        orig_distr_edit = WebDriverWait(mydriver, 240).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#edit-imeta_sourceURL_0 > span:nth-child(1) > span:nth-child(2)")))
         wait_for_obscuring_elements(mydriver)
         orig_distr_edit.click()
         # form: <input type="text" class="form-control input-sm" style="padding-right: 24px;">
         #   css-sel.: .editable-input > input:nth-child(1)
-        orig_distr_form = WebDriverWait(mydriver, 100).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".editable-input > input:nth-child(1)")))
+        orig_distr_form = WebDriverWait(mydriver, 240).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".editable-input > input:nth-child(1)")))
         wait_for_obscuring_elements(mydriver)
         orig_distr_form.send_keys(original_url_text)
         # save: <button type="submit" class="btn btn-primary btn-sm editable-submit"><i class="glyphicon glyphicon-ok"></i> save</button>
@@ -257,14 +257,13 @@ for current_row in range(start_row, end_row + 1):
         keyword = single_keyword.strip(" '")
         try:
             wait_for_obscuring_elements(mydriver)
-            keywords_form = WebDriverWait(mydriver, 50).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".select2-search__field")))
+            keywords_form = WebDriverWait(mydriver, 240).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".select2-search__field")))
             keywords_form.click()
             keywords_form.send_keys(keyword)
             #sleep(2)
             wait_for_obscuring_elements(mydriver)
-            #keyword_sugg = WebDriverWait(mydriver, 50).until(EC.element_to_be_clickable((By.CSS_SELECTOR, ".select2-results__option")))
             # find the list element, taking care to match the exact text [suggestion from user sefk]:
-            keyword_sugg = WebDriverWait(mydriver, 50).until(EC.element_to_be_clickable((By.XPATH, f"//li[contains(@class, 'select2-results__option') and text()='{keyword}']")))
+            keyword_sugg = WebDriverWait(mydriver, 240).until(EC.element_to_be_clickable((By.XPATH, f"//li[contains(@class, 'select2-results__option') and text()='{keyword}']")))
             wait_for_obscuring_elements(mydriver)
             keyword_sugg.click()
         except:
@@ -278,13 +277,13 @@ for current_row in range(start_row, end_row + 1):
     if len(geographic_coverage_text) != 0 and geographic_coverage_text != " ":
         # edit: <span data-reactid=".0.3.1.1.0.1.2.0.2.1:$0.$1.$1.0.$displayPropKey1.0.5:$dcterms_location_0_0.0.0.0.0.2.0.1"> edit</span>
         #   css-sel: #edit-dcterms_location_0 > span:nth-child(1) > span:nth-child(2)
-        geogr_cov_edit = WebDriverWait(mydriver, 50).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#edit-dcterms_location_0 > span:nth-child(1) > span:nth-child(2)")))
+        geogr_cov_edit = WebDriverWait(mydriver, 240).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#edit-dcterms_location_0 > span:nth-child(1) > span:nth-child(2)")))
         #print("edit-button geogr_cov_form found")
         wait_for_obscuring_elements(mydriver)
         geogr_cov_edit.click()
         # form: <input type="text" class="form-control input-sm" style="padding-right: 24px;">
         #   .editable-input > input:nth-child(1)
-        geogr_cov_form = WebDriverWait(mydriver, 50).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".editable-input > input:nth-child(1)")))
+        geogr_cov_form = WebDriverWait(mydriver, 240).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".editable-input > input:nth-child(1)")))
         wait_for_obscuring_elements(mydriver)
         geogr_cov_form.send_keys(geographic_coverage_text)
         geogr_cov_form.submit()
@@ -297,23 +296,23 @@ for current_row in range(start_row, end_row + 1):
     if len(timeperiod_start_text) != 0 or len(timeperiod_end_text) != 0:
         # edit: <span data-reactid=".0.3.1.1.0.1.2.0.2.1:$0.$1.$1.0.$displayPropKey2.0.2.2"> add value</span>
         #   #groupAttr1 > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > a:nth-child(3) > span:nth-child(3)
-        time_period_add_btn = WebDriverWait(mydriver, 50).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#groupAttr1 > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > a:nth-child(3) > span:nth-child(3)")))
+        time_period_add_btn = WebDriverWait(mydriver, 240).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#groupAttr1 > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > a:nth-child(3) > span:nth-child(3)")))
         #print("time_period_add_btn found")
         wait_for_obscuring_elements(mydriver)
         time_period_add_btn.click()
         # start: <input type="text" class="form-control" name="startDate" id="startDate" required="" placeholder="YYYY-MM-DD or YYYY-MM or YYYY" title="Enter as YYYY-MM-DD or YYYY-MM or YYYY" value="" data-reactid=".4.0.0.1.1.0.1.0">
         #   #startDate
-        time_period_start = WebDriverWait(mydriver, 50).until(EC.presence_of_element_located((By.CSS_SELECTOR, "#startDate")))
+        time_period_start = WebDriverWait(mydriver, 240).until(EC.presence_of_element_located((By.CSS_SELECTOR, "#startDate")))
         wait_for_obscuring_elements(mydriver)
         time_period_start.send_keys(timeperiod_start_text)
         # <input type="text" class="form-control" name="endDate" id="endDate" placeholder="YYYY-MM-DD or YYYY-MM or YYYY" title="Enter as YYYY-MM-DD or YYYY-MM or YYYY" value="" data-reactid=".4.0.0.1.1.1.1.0">
         #   #endDate
-        time_period_end = WebDriverWait(mydriver, 50).until(EC.presence_of_element_located((By.CSS_SELECTOR, "#endDate")))
+        time_period_end = WebDriverWait(mydriver, 240).until(EC.presence_of_element_located((By.CSS_SELECTOR, "#endDate")))
         wait_for_obscuring_elements(mydriver)
         time_period_end.send_keys(timeperiod_end_text)
         # <button type="button" class="btn btn-primary save-dates" data-reactid=".4.0.0.1.1.3.0.0">Save &amp; Apply</button>
         #    .save-dates
-        save_time_btn = WebDriverWait(mydriver, 50).until(EC.element_to_be_clickable((By.CSS_SELECTOR, ".save-dates")))
+        save_time_btn = WebDriverWait(mydriver, 240).until(EC.element_to_be_clickable((By.CSS_SELECTOR, ".save-dates")))
         wait_for_obscuring_elements(mydriver)
         save_time_btn.click()
 
@@ -324,17 +323,17 @@ for current_row in range(start_row, end_row + 1):
     if len(datatype_to_select) != 0 and datatype_to_select != " ":
         # <span data-reactid=".0.3.1.1.0.1.2.0.2.1:$0.$1.$1.0.$displayPropKey5.$disco_kindOfData_0.1.0.0.0.2.1"> edit</span>
         #   #disco_kindOfData_0 > span:nth-child(2)
-        datatypes_edit_btn = WebDriverWait(mydriver, 50).until(EC.presence_of_element_located((By.CSS_SELECTOR, "#disco_kindOfData_0 > span:nth-child(2)")))
+        datatypes_edit_btn = WebDriverWait(mydriver, 240).until(EC.presence_of_element_located((By.CSS_SELECTOR, "#disco_kindOfData_0 > span:nth-child(2)")))
         wait_for_obscuring_elements(mydriver)
         datatypes_edit_btn.click()
         wait_for_obscuring_elements(mydriver)
         # <span> geographic information system (GIS) data</span>  # (there is a space character at the beginning of the string!)
         #   .editable-checklist > div:nth-child(8) > label:nth-child(1) > span:nth-child(2)
-        datatype_text = WebDriverWait(mydriver, 50).until(EC.presence_of_element_located((By.XPATH, f"//span[contains(text(), '{datatype_to_select}')]")))
+        datatype_text = WebDriverWait(mydriver, 240).until(EC.presence_of_element_located((By.XPATH, f"//span[contains(text(), '{datatype_to_select}')]")))
         datatype_text.click()
         # <button type="submit" class="btn btn-primary btn-sm editable-submit"><i class="glyphicon glyphicon-ok"></i> save</button>
         #   .editable-submit
-        datatypes_save_btn = WebDriverWait(mydriver, 50).until(EC.element_to_be_clickable((By.CSS_SELECTOR, ".editable-submit")))
+        datatypes_save_btn = WebDriverWait(mydriver, 240).until(EC.element_to_be_clickable((By.CSS_SELECTOR, ".editable-submit")))
         datatypes_save_btn.click()
 
 
@@ -346,15 +345,15 @@ for current_row in range(start_row, end_row + 1):
         # the text for collection notes is the note and the download date, if the note cell in the csv file isn't empty (otherwise it's only the date):
         text_for_collectionnotes = datadict["12_collection_notes"] + " " + downloaddate if len(datadict["12_collection_notes"]) != 0 and datadict["12_collection_notes"] != " " else downloaddate
         # css-sel.: #edit-imeta_collectionNotes_0 > span:nth-child(2)
-        coll_notes_edit_btn = WebDriverWait(mydriver, 50).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#edit-imeta_collectionNotes_0 > span:nth-child(2)")))
+        coll_notes_edit_btn = WebDriverWait(mydriver, 240).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#edit-imeta_collectionNotes_0 > span:nth-child(2)")))
         wait_for_obscuring_elements(mydriver)
         coll_notes_edit_btn.click()
         # css-sel: body
-        coll_notes_form = WebDriverWait(mydriver, 50).until(EC.presence_of_element_located((By.CSS_SELECTOR, "body")))
+        coll_notes_form = WebDriverWait(mydriver, 240).until(EC.presence_of_element_located((By.CSS_SELECTOR, "body")))
         wait_for_obscuring_elements(mydriver)
         coll_notes_form.send_keys(text_for_collectionnotes)
         # css-sel: .editable-submit
-        coll_notes_save_btn = WebDriverWait(mydriver, 50).until(EC.element_to_be_clickable((By.CSS_SELECTOR, ".editable-submit")))
+        coll_notes_save_btn = WebDriverWait(mydriver, 240).until(EC.element_to_be_clickable((By.CSS_SELECTOR, ".editable-submit")))
         coll_notes_save_btn.click()
 
 
@@ -363,10 +362,10 @@ for current_row in range(start_row, end_row + 1):
     # upload-button: <span data-reactid=".0.3.1.1.0.0.0.0.0.0.1.2.3">Upload Files</span>
     #   a.btn-primary:nth-child(3) > span:nth-child(4)
     wait_for_obscuring_elements(mydriver)
-    upload_btn = WebDriverWait(mydriver, 50).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "a.btn-primary:nth-child(3) > span:nth-child(4)")))
+    upload_btn = WebDriverWait(mydriver, 240).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "a.btn-primary:nth-child(3) > span:nth-child(4)")))
     upload_btn.click()
     wait_for_obscuring_elements(mydriver)
-    fileupload_field = WebDriverWait(mydriver, 50).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".col-md-offset-2 > span:nth-child(1)")))
+    fileupload_field = WebDriverWait(mydriver, 240).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".col-md-offset-2 > span:nth-child(1)")))
 
     filepaths_to_upload = get_paths_uploadfiles(folder_path_uploadfiles)
     for singlefile in filepaths_to_upload:
@@ -386,7 +385,7 @@ for current_row in range(start_row, end_row + 1):
 
     # close-btn: .importFileModal > div:nth-child(3) > button:nth-child(1)
     wait_for_obscuring_elements(mydriver)
-    close_btn = WebDriverWait(mydriver, 50).until(EC.element_to_be_clickable((By.CSS_SELECTOR, ".importFileModal > div:nth-child(3) > button:nth-child(1)")))
+    close_btn = WebDriverWait(mydriver, 240).until(EC.element_to_be_clickable((By.CSS_SELECTOR, ".importFileModal > div:nth-child(3) > button:nth-child(1)")))
     close_btn.click()
 
 
