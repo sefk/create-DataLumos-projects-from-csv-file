@@ -59,10 +59,10 @@ def read_csv_line(csv_file, line_to_process):
             if i == (line_to_process - 1):  # -1 because i starts counting at 0
                 return singlerow  # is already a dictionary
 
-def get_paths_uploadfiles(folderpath):
+def get_paths_uploadfiles(folderpath, projectfolder):
     # Builds a list with all the single file paths to be uploaded. Takes as argument the path to the parent folder,
     #   where all the data folders are located (for example, the path to the external USB drive).
-    mypath = datadict["path"]
+    mypath = projectfolder
     if mypath[0:2] == ".\\" or mypath[0:2] == "./":
         # eliminate the first two characters, the dot and the slash:
         mypath = mypath[2:]
@@ -359,34 +359,33 @@ for current_row in range(start_row, end_row + 1):
 
     # --- Upload files
 
-    # upload-button: <span data-reactid=".0.3.1.1.0.0.0.0.0.0.1.2.3">Upload Files</span>
-    #   a.btn-primary:nth-child(3) > span:nth-child(4)
-    wait_for_obscuring_elements(mydriver)
-    upload_btn = WebDriverWait(mydriver, 240).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "a.btn-primary:nth-child(3) > span:nth-child(4)")))
-    upload_btn.click()
-    wait_for_obscuring_elements(mydriver)
-    fileupload_field = WebDriverWait(mydriver, 240).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".col-md-offset-2 > span:nth-child(1)")))
+    if len(datadict["path"]) != 0 and datadict["path"] != " ":
+        # upload-button: <span data-reactid=".0.3.1.1.0.0.0.0.0.0.1.2.3">Upload Files</span>
+        #   a.btn-primary:nth-child(3) > span:nth-child(4)
+        wait_for_obscuring_elements(mydriver)
+        upload_btn = WebDriverWait(mydriver, 50).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "a.btn-primary:nth-child(3) > span:nth-child(4)")))
+        upload_btn.click()
+        wait_for_obscuring_elements(mydriver)
+        fileupload_field = WebDriverWait(mydriver, 50).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".col-md-offset-2 > span:nth-child(1)")))
 
-    filepaths_to_upload = get_paths_uploadfiles(folder_path_uploadfiles)
-    for singlefile in filepaths_to_upload:
-        drag_and_drop_file(fileupload_field, singlefile)
+        filepaths_to_upload = get_paths_uploadfiles(folder_path_uploadfiles, datadict["path"])
+        for singlefile in filepaths_to_upload:
+            drag_and_drop_file(fileupload_field, singlefile)
 
-    # when a file is uploaded and its progress bar is complete, a text appears: "File added to queue for upload."
-    #   To check that the files are completey uploaded, this text has to be there as often as the number of files:
-    filecount = len(filepaths_to_upload)
-    #print("filecount:", filecount)
-    #sleep(10)
-    test2 = mydriver.find_elements(By.XPATH, "//span[text()='File added to queue for upload.']")
-    # wait until the text has appeared as often as there are files:
-    WebDriverWait(mydriver, 2000).until(lambda x: True if len(mydriver.find_elements(By.XPATH, "//span[text()='File added to queue for upload.']")) == filecount else False)
-    print("\nEverything should be uploaded completely now.\n")
+        # when a file is uploaded and its progress bar is complete, a text appears: "File added to queue for upload."
+        #   To check that the files are completey uploaded, this text has to be there as often as the number of files:
+        filecount = len(filepaths_to_upload)
+        #print("filecount:", filecount)
+        #sleep(10)
+        test2 = mydriver.find_elements(By.XPATH, "//span[text()='File added to queue for upload.']")
+        # wait until the text has appeared as often as there are files:
+        WebDriverWait(mydriver, 2000).until(lambda x: True if len(mydriver.find_elements(By.XPATH, "//span[text()='File added to queue for upload.']")) == filecount else False)
+        print("\nEverything should be uploaded completely now.\n")
 
-
-
-    # close-btn: .importFileModal > div:nth-child(3) > button:nth-child(1)
-    wait_for_obscuring_elements(mydriver)
-    close_btn = WebDriverWait(mydriver, 240).until(EC.element_to_be_clickable((By.CSS_SELECTOR, ".importFileModal > div:nth-child(3) > button:nth-child(1)")))
-    close_btn.click()
+        # close-btn: .importFileModal > div:nth-child(3) > button:nth-child(1)
+        wait_for_obscuring_elements(mydriver)
+        close_btn = WebDriverWait(mydriver, 50).until(EC.element_to_be_clickable((By.CSS_SELECTOR, ".importFileModal > div:nth-child(3) > button:nth-child(1)")))
+        close_btn.click()
 
 
     if current_row == end_row:
